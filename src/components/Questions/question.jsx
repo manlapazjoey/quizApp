@@ -1,5 +1,7 @@
-import React from 'react';
+/* eslint-disable no-underscore-dangle */
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import Options from '../Options';
 
 const testFunctiion = data => {
   switch (data) {
@@ -25,10 +27,13 @@ function Question({
   // questionSpecific,
   questionNumber,
   totalQuestion,
-  questionIndex,
+  // questionIndex,
   isLoading,
   onContinueClick,
+  setAnswer,
 }) {
+  const [selected, setSelected] = useState(null);
+
   return (
     <div key={question.id}>
       <div className="px-2 py-2 pb-8 lg:px-8 lg:py-4">
@@ -54,22 +59,16 @@ function Question({
                 <p className="text-4xl font-bold p-4">{question.question}</p>
               </div>
             </div>
-            <div className="flex justify-center pt-16">
+            <div className="flex justify-center pt-4 lg:pt-16">
               <div className="flex flex-col gap-2">
                 {question.options.map((data, index) => (
-                  <div
-                    key={data.id}
-                    className="bg-white rounded-md py-2 px-4 pr-6"
-                  >
-                    <div className="flex flex-row gap-4">
-                      <p className="text-lg font-bold mr-6 bg-gray-200 p-2 px-4 rounded-full">
-                        {testFunctiion(index)}
-                      </p>
-                      <div className="grid content-center">
-                        <p className="text-lg font-bold">{data.value}</p>
-                      </div>
-                    </div>
-                  </div>
+                  <Options
+                    key={index}
+                    choice={data}
+                    selected={selected}
+                    setSelected={setSelected}
+                    setAnswer={setAnswer}
+                  />
                 ))}
               </div>
             </div>
@@ -112,8 +111,10 @@ function Question({
 }
 
 Question.propTypes = {
+  onContinueClick: PropTypes.func.isRequired,
+  setAnswer: PropTypes.func.isRequired,
   question: PropTypes.exact({
-    id: PropTypes.number.isRequired,
+    _id: PropTypes.string.isRequired,
     question: PropTypes.string.isRequired,
     options: PropTypes.arrayOf(
       PropTypes.exact({
@@ -125,22 +126,8 @@ Question.propTypes = {
     type: PropTypes.string.isRequired,
     weight: PropTypes.number.isRequired,
   }).isRequired,
-  // questionSpecific: PropTypes.exact({
-  //   id: PropTypes.number.isRequired,
-  //   question: PropTypes.string.isRequired,
-  //   options: PropTypes.arrayOf(
-  //     PropTypes.exact({
-  //       id: PropTypes.number.isRequired,
-  //       value: PropTypes.string.isRequired,
-  //     }),
-  //   ),
-  //   correctAnswer: PropTypes.number.isRequired,
-  //   type: PropTypes.string.isRequired,
-  //   weight: PropTypes.number.isRequired,
-  // }).isRequired,
   questionNumber: PropTypes.number.isRequired,
   totalQuestion: PropTypes.number.isRequired,
-  questionIndex: PropTypes.number.isRequired,
   isLoading: PropTypes.bool.isRequired,
 };
 

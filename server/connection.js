@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const dbString = process.env.MONGO_DB_CONNECTION;
+mongoose.set('strictQuery', false);
 mongoose
   .connect(`${dbString}`, {
     useNewUrlParser: true,

@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 function AuthLayout({ user }) {
   if (user) {
-    console.log('napasok dito');
     return <Navigate to="/dashboard" />;
   }
 

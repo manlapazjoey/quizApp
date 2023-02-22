@@ -16,7 +16,5 @@ export default (state = errorInitialState, { type, payload, meta }) => {
       },
     ];
   }
-  return state.filter(
-    x => !(x.action === actionType && x.loadingId === meta.loadingId),
-  );
+  return state.filter(x => !(x.action === actionType));
 };

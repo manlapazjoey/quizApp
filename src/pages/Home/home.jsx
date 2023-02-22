@@ -1,30 +1,12 @@
 import React, { useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
-// import Product from '../../components/Product';
 import { Link } from 'react-router-dom';
-import Questions from '../../components/Questions';
 import History from '../../components/History';
 
-function Home({
-  loadProducts,
-  loadCart,
-  loadQuestions,
-  loadHistory,
-  questions,
-  history,
-  // questionSpecific,
-  user,
-  loading,
-  hasError,
-}) {
+function Home({ loadResult, result, user, loading, hasError }) {
   const loadData = useCallback(async () => {
-    await Promise.all([
-      loadProducts(),
-      loadCart(),
-      loadQuestions(),
-      loadHistory(),
-    ]);
-  }, [loadProducts, loadCart, loadQuestions, loadHistory]);
+    await Promise.all([loadResult()]);
+  }, [loadResult]);
 
   useEffect(() => {
     loadData();
@@ -37,14 +19,6 @@ function Home({
   if (hasError) {
     return <h1 data-testid="error">Something went wrong...</h1>;
   }
-
-  let questionIndex = 0;
-
-  const continueClick = data => {
-    if (questions.length <= data) {
-      questionIndex += 1;
-    }
-  };
 
   return (
     <div className="h-screen bg-gray-200">
@@ -81,12 +55,20 @@ function Home({
             className="grid grid-cols-1 lg:grid-cols-3 px-6 pb-8"
             style={{ borderTop: '1px solid black', paddingTop: '1rem' }}
           >
-            {history && history.length ? (
-              history.map(x => <History details={x} />)
+            {result && result.length ? (
+              result.map(x => <History details={x} />)
             ) : (
-              <p className="text-xs font-light italic text-gray-400 ">
-                No history available !
-              </p>
+              <>
+                <History />
+                {/* <div className="col-span-3 text-center py-4">
+                  <h3 className="mt-2 text-sm font-medium text-gray-900">
+                    No results available!
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-500">
+                    There are no results available as of the moment
+                  </p>
+                </div> */}
+              </>
             )}
           </div>
         </div>
@@ -96,26 +78,8 @@ function Home({
 }
 
 Home.propTypes = {
-  loadProducts: PropTypes.func.isRequired,
-  loadCart: PropTypes.func.isRequired,
-  loadQuestions: PropTypes.func.isRequired,
-  loadHistory: PropTypes.func.isRequired,
-  questions: PropTypes.arrayOf(
-    PropTypes.exact({
-      id: PropTypes.number.isRequired,
-      question: PropTypes.string.isRequired,
-      options: PropTypes.arrayOf(
-        PropTypes.exact({
-          id: PropTypes.number.isRequired,
-          value: PropTypes.string.isRequired,
-        }),
-      ),
-      correctAnswer: PropTypes.number.isRequired,
-      type: PropTypes.string.isRequired,
-      weight: PropTypes.number.isRequired,
-    }),
-  ).isRequired,
-  history: PropTypes.arrayOf(
+  loadResult: PropTypes.func.isRequired,
+  result: PropTypes.arrayOf(
     PropTypes.exact({
       id: PropTypes.number.isRequired,
       userId: PropTypes.number.isRequired,
@@ -129,19 +93,6 @@ Home.propTypes = {
       score: PropTypes.number.isRequired,
     }),
   ).isRequired,
-  // questionSpecific: PropTypes.exact({
-  //   id: PropTypes.number.isRequired,
-  //   question: PropTypes.string.isRequired,
-  //   options: PropTypes.arrayOf(
-  //     PropTypes.exact({
-  //       id: PropTypes.number.isRequired,
-  //       value: PropTypes.string.isRequired,
-  //     }),
-  //   ),
-  //   correctAnswer: PropTypes.number.isRequired,
-  //   type: PropTypes.string.isRequired,
-  //   weight: PropTypes.number.isRequired,
-  // }).isRequired,
   loading: PropTypes.bool.isRequired,
   hasError: PropTypes.bool.isRequired,
   user: PropTypes.shape({}),

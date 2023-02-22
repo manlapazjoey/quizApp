@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'http://localhost:4000/api',
   timeout: '5000',
   timeoutErrorMessage: 'Request Timeout. try after sometime',
 });
@@ -16,7 +16,9 @@ axiosInstance.interceptors.request.use(
     }
     return updatedConfig;
   },
-  error => Promise.reject(error),
+  error => {
+    Promise.reject(error);
+  },
 );
 
 axiosInstance.interceptors.response.use(

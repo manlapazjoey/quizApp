@@ -5,7 +5,7 @@ import errors from './errorReducer';
 import { CartReducder as cart } from './cartReducer';
 import products from './productReducer';
 import questions from './questionReducer';
-import history from './historyReducer';
+import result from './resultReducer';
 
 export default combineReducers({
   user,
@@ -14,5 +14,5 @@ export default combineReducers({
   cart,
   products,
   questions,
-  history,
+  result,
 });
