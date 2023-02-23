@@ -18,53 +18,6 @@ export const registerFields = [
       return '';
     },
   },
-  // {
-  //   component: Select,
-  //   name: 'gender',
-  //   id: 'gender',
-  //   'data-value': '',
-  //   placeholder: 'Gender',
-  //   options: [
-  //     {
-  //       value: 'male',
-  //       text: 'Male',
-  //     },
-  //     {
-  //       value: 'female',
-  //       text: 'Female',
-  //     },
-  //     {
-  //       value: 'other',
-  //       text: 'Other',
-  //     },
-  //   ],
-  //   validate: value => {
-  //     if (!value) {
-  //       return 'Required...';
-  //     }
-  //     return '';
-  //   },
-  // },
-  // {
-  //   component: Checkbox,
-  //   label: 'hobbies',
-  //   name: 'hobbies',
-  //   'data-value': [],
-  //   options: [
-  //     {
-  //       id: 'cricket',
-  //       text: 'Cricket',
-  //     },
-  //     {
-  //       id: 'football',
-  //       text: 'Football',
-  //     },
-  //     {
-  //       id: 'golf',
-  //       text: 'golf',
-  //     },
-  //   ],
-  // },
   {
     component: Input,
     name: 'email',
