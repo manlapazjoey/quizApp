@@ -6,7 +6,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../schema/user');
-// const db = require('../connection');
+const db = require('../connection');
 
 const authRouter = express.Router();
 
@@ -21,6 +21,7 @@ authRouter.post('/login', async (req, res) => {
         .send('Invalid user id, Please check credentials provided');
     }
     const isMatch = bcrypt.compare(password, user.password);
+    console.log(isMatch);
     if (isMatch) {
       const accessToken = jwt.sign(
         { userId: user._id },

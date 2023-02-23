@@ -3,8 +3,8 @@
 
 const express = require('express');
 const verifyToken = require('../middleware/verifyToken');
-const Question = require('../schema/questions');
-// const db = require('../connection');
+const Questions = require('../schema/questions');
+const db = require('../connection');
 
 const questionRouter = express.Router();
 questionRouter.get('/', async (req, res) => {

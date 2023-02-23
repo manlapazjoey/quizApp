@@ -63,7 +63,7 @@ function Options({ choice, selected, setSelected, setAnswer }) {
         name="choices"
         className="hidden"
         onChange={() => {
-          setSelected(choice), setAnswer(choice.id);
+          console.log(choice.id), setSelected(choice), setAnswer(choice.id);
         }}
       />
     </label>

@@ -36,21 +36,20 @@ function Exam({
     });
   };
 
-  useEffect(() => {
-    loadData();
-  }, [loadData]);
-
   const nextQuestion = () => {
     console.log(questionIndex);
     console.log(questionCounter);
     console.log(questions.length);
     if (questionCounter < questions.length) {
-      setQuestionIndex(x => x + 1);
-      setQuestionCount(x => x + 1);
       setAllAnswers(x => [
         ...x,
         { questionId: questions[questionIndex]._id, answers },
       ]);
+      console.log(questions[questionIndex]._id);
+      console.log(answers);
+      setQuestionIndex(x => x + 1);
+      setQuestionCount(x => x + 1);
+
       console.log('if');
       console.log(allAnswers);
       loadData();
@@ -59,12 +58,15 @@ function Exam({
         ...x,
         { questionId: questions[questionIndex]._id, answers },
       ]);
-      loadData();
       console.log('else');
       console.log(allAnswers);
-      submitFinalAnswer();
+      // submitFinalAnswer();
     }
   };
+
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
 
   if (loading) {
     return <h1 data-testid="loading">Loading...</h1>;
@@ -86,6 +88,7 @@ function Exam({
             questionIndex={questionIndex}
             question={questions[questionIndex]}
             setAnswer={setAnswers}
+            submitFinalAnswer={submitFinalAnswer}
             onContinueClick={nextQuestion}
           />
         ) : (
