@@ -1,7 +1,10 @@
-import express from 'express';
-import verifyToken from '../middleware/verifyToken';
-import Questions from '../schema/questions';
-import db from '../connection';
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
+
+const express = require('express');
+const verifyToken = require('../middleware/verifyToken');
+const Question = require('../schema/questions');
+// const db = require('../connection');
 
 const questionRouter = express.Router();
 questionRouter.get('/', async (req, res) => {
@@ -14,4 +17,4 @@ questionRouter.get('/', async (req, res) => {
     res.status(401).json({ message: error.message });
   }
 });
-export default questionRouter;
+module.exports = questionRouter;

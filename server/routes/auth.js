@@ -2,18 +2,11 @@
 /* eslint-disable no-empty */
 /* eslint-disable no-underscore-dangle */
 
-import express from 'express';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import User from '../schema/user';
-import db from '../connection';
-// const jwt = require('jsonwebtoken');
-// const db = require('../db/conn');
-// const User = require('../schema/user');
-// const authRoutes = express.Router();
-// const dotenv = require('dotenv');
-// const bcrypt = require('bcrypt');
-// dotenv.config();
+const express = require('express');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const User = require('../schema/user');
+// const db = require('../connection');
 
 const authRouter = express.Router();
 
@@ -81,4 +74,4 @@ authRouter.post('/forgotPassword', () => {});
 
 authRouter.post('/resetPassword', () => {});
 
-export default authRouter;
+module.exports = authRouter;

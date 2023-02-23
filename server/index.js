@@ -1,33 +1,31 @@
-// import express from 'express';
-// import dotEnv from 'dotenv';
-// import Routes from './routes';
+const express = require('express');
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
+const dotenv = require('dotenv');
 
-// dotEnv.config();
-
-// const port = process.env.PORT || 3000;
-
-// const app = express();
-
-// Routes.initRoutes(app);
-
-// app.listen(port, () => {
-//   console.log('Server started');
-// });
-
-import bodyParser from 'body-parser';
-import express from 'express';
-import cors from 'cors';
-import Routes from './routes';
+// Routers
+const authRouter = require('./routes/auth');
+const questionRouter = require('./routes/questions');
+const resultRouter = require('./routes/results');
 
 const app = express();
-const dotenv = require('dotenv');
 
 dotenv.config();
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(cookieParser());
 
-Routes.initRoutes(app);
+app.use('/api/auth', authRouter);
+app.use('/api/questions', questionRouter);
+app.use('/api/quiz', resultRouter);
+
+// app.use('/api/user', userRouter);
+//     app.use('/api/auth', authRouter);
+//     app.use('/api/questions', questionRouter);
+//     app.use('/api/products', productsRouter);
+//     app.use('/api/cart', cartRouter);
+//     app.use('/api/quiz', resultRouter);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

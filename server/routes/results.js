@@ -1,9 +1,9 @@
-import express from 'express';
-import { ObjectId } from 'mongodb';
-import verifyToken from '../middleware/verifyToken';
-import Question from '../schema/questions';
-import Answers from '../schema/results';
-import db from '../connection';
+const express = require('express');
+const { ObjectId } = require('mongodb');
+const verifyToken = require('../middleware/verifyToken');
+const Question = require('../schema/questions');
+const Answers = require('../schema/results');
+// const db = require('../connection');
 
 const resultRouter = express.Router();
 
@@ -44,4 +44,4 @@ resultRouter.post('/submitAnswer', verifyToken, async (req, res) => {
   }
 });
 
-export default resultRouter;
+module.exports = resultRouter;

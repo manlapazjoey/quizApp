@@ -5,18 +5,31 @@ import { useDispatch } from 'react-redux';
 import Questions from '../../components/Questions';
 import Results from '../../components/Results';
 
-function Exam({ loadQuestions, questions, loading, hasError }) {
+function Exam({
+  loadQuestions,
+  questions,
+  loading,
+  hasError,
+  // answers,
+  // questionIndex,
+  // allAnswers,
+  // setQuestionIndex,
+  // setAnswers,
+  // setAllAnswers,
+}) {
   const loadData = useCallback(async () => {
     await Promise.all([loadQuestions()]);
   }, [loadQuestions]);
 
   const [questionIndex, setQuestionIndex] = useState(0);
+  const [questionCounter, setQuestionCount] = useState(1);
   const [answers, setAnswers] = useState([]);
   const [allAnswers, setAllAnswers] = useState([]);
 
   const dispatch = useDispatch();
 
   const submitFinalAnswer = () => {
+    console.log(allAnswers);
     dispatch({
       type: 'SUBMIT_ANSWERS_REQUEST',
       payload: allAnswers,
@@ -29,21 +42,26 @@ function Exam({ loadQuestions, questions, loading, hasError }) {
 
   const nextQuestion = () => {
     console.log(questionIndex);
-    if (questionIndex < questions.length) {
+    console.log(questionCounter);
+    console.log(questions.length);
+    if (questionCounter < questions.length) {
       setQuestionIndex(x => x + 1);
+      setQuestionCount(x => x + 1);
       setAllAnswers(x => [
         ...x,
         { questionId: questions[questionIndex]._id, answers },
       ]);
+      console.log('if');
       console.log(allAnswers);
       loadData();
     } else {
-      setQuestionIndex(x => x + 1);
       setAllAnswers(x => [
         ...x,
         { questionId: questions[questionIndex]._id, answers },
       ]);
       loadData();
+      console.log('else');
+      console.log(allAnswers);
       submitFinalAnswer();
     }
   };
@@ -97,6 +115,28 @@ Exam.propTypes = {
   ).isRequired,
   loading: PropTypes.bool.isRequired,
   hasError: PropTypes.bool.isRequired,
+  // answers: PropTypes.arrayOf(
+  //   PropTypes.exact({
+  //     questionId: PropTypes.string.isRequired,
+  //     answers: PropTypes.number.isRequired,
+  //   }),
+  // ),
+  // allAnswers: PropTypes.arrayOf(
+  //   PropTypes.exact({
+  //     questionId: PropTypes.string.isRequired,
+  //     answers: PropTypes.number.isRequired,
+  //   }),
+  // ),
+  // questionIndex: PropTypes.number,
+  // setQuestionIndex: PropTypes.func.isRequired,
+  // setAnswers: PropTypes.func.isRequired,
+  // setAllAnswers: PropTypes.func.isRequired,
 };
+
+// Exam.defaultProps = {
+//   answers: null,
+//   allAnswers: null,
+//   questionIndex: 0,
+// };
 
 export default Exam;
