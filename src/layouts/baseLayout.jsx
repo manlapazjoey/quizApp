@@ -15,10 +15,10 @@ function BaseLayout() {
   }, [dispatch]);
 
   return (
-    <div>
+    <>
       <Outlet />
       <Errors />
-    </div>
+    </>
   );
 }
 

@@ -11,9 +11,7 @@ function MainLayout({ user }) {
   return (
     <div data-testid="main-wrapper">
       <Header />
-      <section className="antialiased h-full bg-gray-200">
-        <Outlet />
-      </section>
+      <Outlet />
     </div>
   );
 }

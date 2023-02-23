@@ -10,9 +10,8 @@ import Register from './pages/Register';
 import AuthLayout from './layouts/authLayout';
 import BaseLayout from './layouts/baseLayout';
 import NotFound from './pages/NotFound';
-import MainLayout from './layouts/mainLayout';
 import LandingPage from './pages/LandingPage';
-import Exam from './pages/Exam';
+import MainLayout from './layouts/mainLayout';
 
 export default createBrowserRouter(
   createRoutesFromElements(
@@ -20,7 +19,6 @@ export default createBrowserRouter(
       <Route index element={<LandingPage />} />
       <Route path="dashboard" element={<MainLayout />}>
         <Route index element={<Home />} />
-        <Route path="exam" element={<Exam />} />
       </Route>
       <Route path="auth" element={<AuthLayout />}>
         <Route index element={<Login />} />

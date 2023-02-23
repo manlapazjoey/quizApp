@@ -1,6 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { loginFields, loginInitialValues } from './loginFields';
 import CustomForm from '../../components/CustomForm';
 
@@ -38,12 +38,12 @@ function Login({ login }) {
                   </label>
                 </div>
               </div>
-              <a
-                href="#"
+              <Link
+                to="register"
                 className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
               >
                 Forgot password?
-              </a>
+              </Link>
             </div>
             <div>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">

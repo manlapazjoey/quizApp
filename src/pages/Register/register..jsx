@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { registerFields, registerInitialValues } from './registerFields';
 import CustomForm from '../../components/CustomForm';
@@ -16,7 +17,16 @@ function Register({ register }) {
             onSubmit={register}
             fields={registerFields}
             btnText="Register"
-          />
+          >
+            <p className="mt-2 text-center text-sm text-gray-600">
+              <Link
+                to="/auth"
+                className="font-medium text-indigo-600 hover:text-indigo-500"
+              >
+                Already have an account? Login
+              </Link>
+            </p>
+          </CustomForm>
         </div>
       </div>
     </div>

@@ -7,7 +7,6 @@ export default async ({ dispatch, apiData, type, meta }) => {
       meta,
     });
     const res = await axiosInstance(apiData);
-    console.log(res);
     dispatch({
       type: `${type}_SUCCESS`,
       payload: apiData.method === 'delete' ? apiData.data : res,

@@ -1,37 +1,17 @@
-// import express from 'express';
-// import dotEnv from 'dotenv';
-// import Routes from './routes';
-
-// dotEnv.config();
-
-// const port = process.env.PORT || 3000;
-
-// const app = express();
-
-// Routes.initRoutes(app);
-
-// app.listen(port, () => {
-//   console.log('Server started');
-// });
-
-import bodyParser from 'body-parser';
 import express from 'express';
-import cors from 'cors';
+import dotEnv from 'dotenv';
 import Routes from './routes';
 
-const app = express();
-const dotenv = require('dotenv');
+dotEnv.config();
 
-dotenv.config();
-app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+const port = process.env.PORT || 3000;
+
+const app = express();
 
 Routes.initRoutes(app);
 
-const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  console.log(`SERVER started at ${port}`);
+  console.log('Server started');
 });
 
 // const server = http.createServer((req, res) => {
